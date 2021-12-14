@@ -3,6 +3,7 @@ package rs.ac.uns.ftn.bankingtransactionprocessor.config;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.annotation.web.configurers.oauth2.server.resource.OAuth2ResourceServerConfigurer;
 
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -13,8 +14,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/actuator/health")
                 .permitAll()
                 .and()
-                .authorizeRequests()
-                .anyRequest()
-                .authenticated();
+                .authorizeRequests(authz -> authz.anyRequest().authenticated())
+                .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt);
     }
 }

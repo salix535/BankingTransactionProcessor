@@ -3,4 +3,7 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: https://cognito-idp.eu-central-1.amazonaws.com/eu-central-1_ayPn8vUih
+          issuer-uri: https://cognito-idp.eu-central-1.amazonaws.com/${USER_POOL_ID}
+aws:
+  sqs:
+    url: ${SQS_URL}
