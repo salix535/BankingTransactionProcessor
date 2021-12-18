@@ -30,5 +30,11 @@ public class TransactionRequest {
     private final String destinationAccountNumber;
 
     @Setter
-    private ZonedDateTime time;
+    private ZonedDateTime creationTime;
+
+    private ZonedDateTime processingTime;
+
+    @Setter
+    private String createdBy;
+
 }

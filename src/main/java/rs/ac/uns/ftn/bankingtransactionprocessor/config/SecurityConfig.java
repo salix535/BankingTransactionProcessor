@@ -14,7 +14,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/actuator/health")
                 .permitAll()
                 .and()
-                .authorizeRequests(authz -> authz.anyRequest().authenticated())
+                .authorizeRequests(auth -> auth.anyRequest().authenticated())
                 .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt);
     }
 }

@@ -3,15 +3,15 @@ package rs.ac.uns.ftn.bankingtransactionprocessor.transaction;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
-import lombok.Builder;
-import lombok.Getter;
+import lombok.*;
 
 import java.math.BigDecimal;
-import java.time.ZonedDateTime;
 
-@DynamoDBTable(tableName = "Transaction")
+@DynamoDBTable(tableName = "transaction")
 @Builder
-@Getter
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Transaction {
 
     @DynamoDBHashKey(attributeName = "transaction_id")
@@ -26,6 +26,15 @@ public class Transaction {
     @DynamoDBAttribute(attributeName = "destination_account_number")
     private String destinationAccountNumber;
 
-    @DynamoDBAttribute(attributeName = "time")
-    private ZonedDateTime time;
+    @DynamoDBAttribute(attributeName = "creation_time")
+    private String creationTime;
+
+    @DynamoDBAttribute(attributeName = "processing_time")
+    private String processingTime;
+
+    @DynamoDBAttribute(attributeName = "created_by")
+    private String createdBy;
+
+    @DynamoDBAttribute(attributeName = "processed")
+    private boolean processed;
 }
