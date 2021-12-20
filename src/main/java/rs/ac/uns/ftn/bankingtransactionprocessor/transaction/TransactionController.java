@@ -2,25 +2,25 @@ package rs.ac.uns.ftn.bankingtransactionprocessor.transaction;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.security.Principal;
 import java.util.List;
 
 @RestController
 @RequestMapping("/transactions")
 @RequiredArgsConstructor
+@CrossOrigin("http://localhost:4200/")
 public class TransactionController {
 
     private final TransactionService transactionService;
 
     @PostMapping
     public ResponseEntity<Void> createTransaction(@Valid @RequestBody final TransactionRequest transactionRequest,
-                                                  final Authentication principal) {
-
-        transactionService.processTransactionAndSendToSqs(transactionRequest, principal);
+                                                  final JwtAuthenticationToken authentication) {
+        final String userName = (String) authentication.getTokenAttributes().get("username");
+        transactionService.processTransactionAndSendToSqs(transactionRequest, userName);
         return ResponseEntity.noContent().build();
     }
 

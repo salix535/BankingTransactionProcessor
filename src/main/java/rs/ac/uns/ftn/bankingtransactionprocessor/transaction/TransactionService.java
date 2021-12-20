@@ -10,10 +10,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
-import java.security.Principal;
 import java.time.ZonedDateTime;
 import java.util.List;
 
@@ -31,9 +29,9 @@ public class TransactionService {
     @Value("${aws.sqs.url}")
     private String queueUrl;
 
-    public void processTransactionAndSendToSqs(final TransactionRequest transactionRequest, final Authentication principal) {
+    public void processTransactionAndSendToSqs(final TransactionRequest transactionRequest, final String userName) {
         transactionRequest.setCreationTime(ZonedDateTime.now());
-        transactionRequest.setCreatedBy(principal.getName());
+        transactionRequest.setCreatedBy(userName);
         try {
             sqs.sendMessage(queueUrl, objectMapper.writeValueAsString(transactionRequest));
         } catch (JsonProcessingException e) {
