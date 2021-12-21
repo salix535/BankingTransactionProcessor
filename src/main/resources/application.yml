@@ -7,3 +7,5 @@ spring:
 aws:
   sqs:
     url: ${SQS_URL}
+  frontend:
+    url: ${FRONTEND_URL}
