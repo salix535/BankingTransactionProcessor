@@ -9,7 +9,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import java.math.BigDecimal;
-import java.time.ZonedDateTime;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @AllArgsConstructor
@@ -30,9 +30,9 @@ public class TransactionRequest {
     private final String destinationAccountNumber;
 
     @Setter
-    private ZonedDateTime creationTime;
+    private LocalDateTime creationTime;
 
-    private ZonedDateTime processingTime;
+    private LocalDateTime processingTime;
 
     @Setter
     private String createdBy;
